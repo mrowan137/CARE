@@ -22,6 +22,26 @@
 #include "care/GPUMacros.h"
 #include "care/policies.h"
 
+// This makes sure the lambdas get decorated with the right __host__ and or
+// __device__ specifiers
+#if defined(CARE_GPUCC)
+#define CARE_HOST_DEVICE_ACTIVE __host__ __device__
+#define CARE_DEVICE_ACTIVE __device__
+#define CARE_HOST_ACTIVE __host__
+#define CARE_GLOBAL_ACTIVE __global__
+#else // defined CARE_GPUCC
+#define CARE_HOST_DEVICE_ACTIVE
+#define CARE_DEVICE_ACTIVE
+#define CARE_HOST_ACTIVE
+#define CARE_GLOBAL_ACTIVE
+#endif // defined CARE_GPUCC
+
+#if defined(CARE_GPUCC) && defined(CHAI_ENABLE_MANAGED_PTR_ON_GPU)
+#define CARE_MANAGED_PTR_DEVICE_ACTIVE __device__
+#else
+#define CARE_MANAGED_PTR_DEVICE_ACTIVE 
+#endif
+
 /// Used to make sure the start and end macros match
 #ifndef NDEBUG
 #define CARE_NEST_BEGIN(x) { int x ;
