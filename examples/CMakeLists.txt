@@ -20,10 +20,10 @@ if (ENABLE_OPENMP)
    list(APPEND care_depends openmp)
 endif()
 
-blt_add_executable(NAME a
-                   SOURCES a.cpp
+blt_add_executable(NAME managed_ptr_hang
+                   SOURCES managed_ptr_hang.cpp
                    DEPENDS_ON ${care_depends})
 
-target_include_directories(a PRIVATE ${PROJECT_SOURCE_DIR}/src)
-target_include_directories(a PRIVATE ${PROJECT_BINARY_DIR}/include)
+target_include_directories(managed_ptr_hang PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_include_directories(managed_ptr_hang PRIVATE ${PROJECT_BINARY_DIR}/include)
 
